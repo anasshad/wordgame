@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import words from 'an-array-of-english-words';
+import {numberOfLetters, wordsWithLetters} from './utils';
 
 class App extends Component {
   constructor(props){
@@ -12,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    const fourLetterWords = words.filter( w => w.length === 4)
+    const fourLetterWords = wordsWithLetters(numberOfLetters(4))
     this.updateWords(fourLetterWords)
   }
 
