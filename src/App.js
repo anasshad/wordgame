@@ -1,36 +1,39 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import words from 'an-array-of-english-words';
-import {numberOfLetters, wordsWithLetters} from './utils';
+import {findScore, getWordsLetters} from './utils';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      words: null
+      number: null,
+      letters: null,
+      words: [],
+      score: null
     }
   }
 
   componentDidMount(){
-    const fourLetterWords = wordsWithLetters(numberOfLetters(4))
-    this.updateWords(fourLetterWords)
+    this.update()
   }
 
-  updateWords(newWords){
+  update(){
+    const numOfLetters = this.props.letters;
+    const [letters, words] = getWordsLetters(numOfLetters)
     this.setState({
-      words: newWords
+      words,
+      letters
     })
   }
 
   render() {
-    const {words} = this.state;
-    
+    const {words, letters} = this.state;     
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">{letters}</h1>
         </header>
         <div>
           {
