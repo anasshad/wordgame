@@ -17,6 +17,7 @@ const ClockWrapper = styled.div`
   transform: rotate(45deg);
 `;
 
+//Start of Clock Component
 class Clock extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,18 @@ class Clock extends Component {
     this.setState({
       interval
     });
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.addSeconds !== nextProps.addSeconds){
+      this.addSeconds(nextProps.addSeconds)
+    }
+  }
+
+  addSeconds = (seconds) => {
+    this.setState({
+      seconds: this.state.seconds + seconds
+    })
   }
 
   timer = () => {

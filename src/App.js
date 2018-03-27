@@ -69,8 +69,6 @@ class App extends Component {
     const numOfLetters = this.props.letters;
     const letters = randomLetters(numOfLetters);
     const words = numberOfLetters(numOfLetters);
-    console.log("INSIDE UPDATE "+letters);
-    console.log(this.state.letters);
     this.setState({
       words,
       letters,
@@ -82,6 +80,7 @@ class App extends Component {
     const { deckCards } = this.state;
     const score = findScore(deckCards);
     this.setState({
+      addSeconds: score,
       score: this.state.score + score
     });
   };
@@ -111,11 +110,21 @@ class App extends Component {
     }
   };
 
+  cancelLetter = (letter) => {
+    const {letters, deckCards} = this.state;
+    letters.push(letter);
+    deckCards.splice(deckCards.indexOf(letter), 1);
+    this.setState({
+      letters,
+      deckCards
+    })
+  }
+
   render() {
     const { words, letters, score } = this.state;
     return (
       <div className="App">
-        <Clock timesUp={this.timesUp} />
+        <Clock timesUp={this.timesUp} addSeconds={this.state.addSeconds} />
         <div>score: {score}</div>
         <CardContainer>
           {letters &&
@@ -127,6 +136,7 @@ class App extends Component {
           letters={this.state.deckCards}
           positionInDeck={this.findPositionInDeck}
           reorder={this.reorder}
+          cancelLetter={this.cancelLetter}
         />
         <button onClick={() => this.checkWord()}>Submit</button>
         <button onClick={() => this.reset()}>Reset</button>

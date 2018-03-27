@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   justify-content: center;
   background: pink;
   font-size: 4.5em;
+  flex-direction: column;
 `;
 
 const deckCardSource = {
@@ -63,7 +64,10 @@ class Card extends Component {
 
     return connectDragSource(
       connectDropTarget(<div>
-        <Wrapper>{letter}</Wrapper>
+        <Wrapper>
+          {letter}
+          <button onClick={()=>this.props.cancelLetter(letter)}>x</button>
+        </Wrapper>
       </div>),
     );
   }

@@ -50,6 +50,7 @@ class Deck extends Component {
                 letter={letter}
                 positionInDeck={this.props.positionInDeck}
                 reorder={this.props.reorder}
+                cancelLetter={this.props.cancelLetter}
               />
             ))}
         </DeckWrapper>
